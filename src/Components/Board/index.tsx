@@ -71,7 +71,7 @@ const Board: FC<props> = ({ noOfPlayers }) => {
   const rollDice = () => {
     const number = getRandomValue(1, 6);
     setButtonVal(number.toString());
-    if(players[currentPlayer].value == 1 && number !== 6){
+    if(players[currentPlayer].value == 1 && number !== 1){
       setTimeout(()=>{setButtonVal("Roll Dice")
       setCurrentPlayer((currentPlayer) =>currentPlayer == noOfPlayers-1 ? 0 : currentPlayer+1)},1000)
       return;
