@@ -48,7 +48,7 @@ const Board: FC<props> = ({ noOfPlayers }) => {
   }, []);
   const stepper = useCallback((current: number, nextval: number) => {
     const intervalId = setInterval(() => {
-      if (current !== nextval) {
+      if (current !==nextval) {
         current > nextval ? current-- : current++;
         const list = [...players];
         list[currentPlayer].value = current;
@@ -64,16 +64,16 @@ const Board: FC<props> = ({ noOfPlayers }) => {
           stepper(current, didSnakeBite);
         }
         setButtonVal("Roll Dice");
-        setCurrentPlayer((currentPlayer) =>currentPlayer == noOfPlayers-1 ? 0 : currentPlayer+1)
+        setCurrentPlayer((currentPlayer) =>currentPlayer ===noOfPlayers-1 ? 0 : currentPlayer+1)
       }
     }, 500);
   }, [currentPlayer]);
   const rollDice = () => {
     const number = getRandomValue(1, 6);
     setButtonVal(number.toString());
-    if(players[currentPlayer].value == 1 && number !== 1){
+    if(players[currentPlayer].value ===1 && number !==1){
       setTimeout(()=>{setButtonVal("Roll Dice")
-      setCurrentPlayer((currentPlayer) =>currentPlayer == noOfPlayers-1 ? 0 : currentPlayer+1)},1000)
+      setCurrentPlayer((currentPlayer) =>currentPlayer ===noOfPlayers-1 ? 0 : currentPlayer+1)},1000)
       return;
     }
     let current = players[currentPlayer].value;
@@ -81,7 +81,7 @@ const Board: FC<props> = ({ noOfPlayers }) => {
     stepper(current, nextval);
   };
   const buttonDisabled = useMemo(
-    () => !players || Object.keys(players).length == 0 || buttonVal !== 'Roll Dice',
+    () => !players || Object.keys(players).length ===0 || buttonVal !=='Roll Dice',
     [players,buttonVal]
   );
   return (
@@ -93,7 +93,7 @@ const Board: FC<props> = ({ noOfPlayers }) => {
             <tr key={index}>
               {row1.map((val, index) => (
                 <Box
-                  active={val == players[currentPlayer].value}
+                  active={val ===players[currentPlayer].value}
                   snakeVal={snakeBites.get(val)}
                   ladderVal={ladderPoints.get(val)}
                   key={val}
