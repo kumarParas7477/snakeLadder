@@ -1,0 +1,64 @@
+
+.box{
+    width : 2.0rem;
+    height : 2.0rem;
+    border : 0.1rem solid black;
+    align-content: center;
+    margin: 0.2rem;
+    position: relative;
+}
+.active{
+    border-radius: 100%;
+        background-color: rgb(226, 43, 137);
+        border-color: rgb(226, 43, 137);
+}
+
+.snakeClass{
+    background-color: rgb(215, 69, 69);
+}
+
+.ladderClass{
+    background-color: rgb(59, 146, 59);
+}
+
+.value{
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+.stepper{
+    position: absolute;
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 0.1rem solid black;
+    top: 3%;
+    right: 3%;
+    font-size: 0.5rem;
+    background-color: white;
+}
+
+
+.active::after {
+    animation: stepAnim 1000ms cubic-bezier(0.9, 0.7, 0.5, 0.9) infinite;
+  }
+  
+  @keyframes stepAnim {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.4;
+    }
+  }
+  
+  .active::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgb(226, 43, 137);
+    border-radius: 50%;
+    z-index: -1;
+  }
