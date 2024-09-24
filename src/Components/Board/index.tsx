@@ -1,20 +1,16 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import Box from "../Box";
 import styles from "./board.module.css";
+import SelectPlayers from "../selectPlayers";
+import { IPlayer } from "../../types";
+
 interface props {
-  noOfPlayers: number;
+  initialPlayers: IPlayer[];
 }
-const Board: FC<props> = ({ noOfPlayers }) => {
-  const playersList : Array<any> = useMemo(() => {
-    return [
-      { name: "player1", value: 1, color: "yellow" },
-      { name: "player2", value: 1, color: "red" },
-      { name: "player3", value: 1, color: "blue" },
-      { name: "player4", value: 1, color: "violet" },
-      { name: "player5", value: 1, color: "plum" },
-    ];
-  }, []);
-  const [players, setPlayers] = useState(playersList.slice(0,noOfPlayers));
+
+const Board: FC<props> = ({ initialPlayers }) => {
+  const [winner,setWinner] = useState<string | null>(null)
+  const [players, setPlayers] = useState<any[]>(initialPlayers);
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [buttonVal, setButtonVal] = useState<string>("Roll Dice");
   const boxes = useMemo(() => {
@@ -46,54 +42,78 @@ const Board: FC<props> = ({ noOfPlayers }) => {
     }
     return points;
   }, []);
-  const stepper = useCallback((current: number, nextval: number) => {
-    const intervalId = setInterval(() => {
-      if (current !==nextval) {
-        current > nextval ? current-- : current++;
-        const list = [...players];
-        list[currentPlayer].value = current;
-        setPlayers(list);   
-      } else {
-        clearInterval(intervalId); // Stop once it reaches nextval
-        const ladder = ladderPoints.get(nextval);
-        if (ladder) {
-          stepper(current, ladder);
+
+  const stepper = useCallback(
+    (current: number, nextval: number) => {
+      const intervalId = setInterval(() => {
+        if (current !== nextval) {
+          current > nextval ? current-- : current++;
+          const list = [...players];
+          list[currentPlayer].value = current;
+          if(current == 100){
+            setWinner(players[currentPlayer].name);
+            setButtonVal('Reload');
+            return;
+          }
+          setPlayers(list);
+        } else {
+          clearInterval(intervalId); // Stop once it reaches nextval
+          const ladder = ladderPoints.get(nextval);
+          const didSnakeBite = snakeBites.get(nextval);
+          if (ladder) {
+            stepper(current, ladder);
+          }
+          else if (didSnakeBite) {
+            stepper(current, didSnakeBite);
+          }
+          else{
+            setButtonVal("Roll Dice");
+          setCurrentPlayer((currentPlayer) =>
+            currentPlayer === players.length - 1 ? 0 : currentPlayer + 1
+          );
+          }
         }
-        const didSnakeBite = snakeBites.get(nextval);
-        if (didSnakeBite) {
-          stepper(current, didSnakeBite);
-        }
-        setButtonVal("Roll Dice");
-        setCurrentPlayer((currentPlayer) =>currentPlayer ===noOfPlayers-1 ? 0 : currentPlayer+1)
-      }
-    }, 500);
-  }, [currentPlayer]);
+      }, 100);
+    },
+    [currentPlayer,initialPlayers]
+  );
+
   const rollDice = () => {
+    if(winner){
+      window.location.reload()
+    }
     const number = getRandomValue(1, 6);
     setButtonVal(number.toString());
-    if(players[currentPlayer].value ===1 && number !==1){
-      setTimeout(()=>{setButtonVal("Roll Dice")
-      setCurrentPlayer((currentPlayer) =>currentPlayer ===noOfPlayers-1 ? 0 : currentPlayer+1)},1000)
+    if (players[currentPlayer].value === 1 && number !== 1) {
+      setTimeout(() => {
+        setButtonVal("Roll Dice");
+        setCurrentPlayer((currentPlayer) =>
+          currentPlayer === players.length - 1 ? 0 : currentPlayer + 1
+        );
+      }, 1000);
       return;
     }
     let current = players[currentPlayer].value;
     let nextval = current + number;
     stepper(current, nextval);
   };
+
   const buttonDisabled = useMemo(
-    () => !players || Object.keys(players).length ===0 || buttonVal !=='Roll Dice',
-    [players,buttonVal]
+    () =>
+      players.length === 0 ||
+      buttonVal !== "Roll Dice",
+    [players, buttonVal,buttonVal]
   );
-  return (
-    <>
-      <div className={styles.board}>
-       
-        <table>
+
+  const getTable = useCallback(() => {
+    return (
+      <table>
+        <tbody>
           {boxes.map((row1, index) => (
             <tr key={index}>
               {row1.map((val, index) => (
                 <Box
-                  active={val ===players[currentPlayer].value}
+                  active={val === players[currentPlayer]?.value}
                   snakeVal={snakeBites.get(val)}
                   ladderVal={ladderPoints.get(val)}
                   key={val}
@@ -103,16 +123,28 @@ const Board: FC<props> = ({ noOfPlayers }) => {
               ))}
             </tr>
           ))}
-        </table>
-      </div>
-       <div className={styles.currentPlayer}>currentPlayer : {players[currentPlayer].name}</div>
-      <button
-        disabled={buttonDisabled}
-        onClick={rollDice}
-        className={styles.dice}
-      >
-        {buttonVal}
-      </button>
+        </tbody>
+      </table>
+    );
+  },[initialPlayers,currentPlayer,players]);
+  return (
+    <> 
+      {winner && <span>{`${winner} won the game!!`}</span>}
+      <div className={styles.board}>{getTable()}</div>
+      {players.length !== 0 && (
+        <div className={styles.diceAndPlayer}>
+          <div className={styles.currentPlayer}>
+            currentPlayer : {players[currentPlayer]?.name}
+          </div>
+          <button
+            disabled={buttonDisabled}
+            onClick={rollDice}
+            className={styles.dice}
+          >
+            {buttonVal}
+          </button>
+        </div>
+      )}
     </>
   );
 };

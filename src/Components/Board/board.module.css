@@ -4,8 +4,9 @@
         margin: auto;  
         padding: 0.2rem;
         margin-top: 4rem;
+        background-color: white;
 }
-table{
+tbody{
         display: flex;
         flex-direction: column-reverse;
 
@@ -14,7 +15,7 @@ tr{
         display: flex;
 }
 
-table tr:nth-child(even){
+tbody tr:nth-child(even){
      flex-direction: row-reverse;   
 }
 .dice{
@@ -31,4 +32,9 @@ table tr:nth-child(even){
 .currentPlayer{
         margin-top: 1rem;
         font-weight: bold;
+}
+
+
+.diceAndPlayer{
+        margin-bottom: 1rem;
 }

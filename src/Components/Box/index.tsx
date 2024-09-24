@@ -15,8 +15,7 @@ const Box: FC<boxProps> = ({ value, active, snakeVal, ladderVal ,players}) => {
       return obj
   },[players])
   return (
-    <div
-      className={classNames([
+    <td  className={classNames([
         styles.box,
         active ? styles.active : {},
         snakeVal ? styles.snakeClass : ladderVal ? styles.ladderClass : {},
@@ -26,8 +25,9 @@ const Box: FC<boxProps> = ({ value, active, snakeVal, ladderVal ,players}) => {
       {(snakeVal || ladderVal) && (
         <span className={styles.stepper}> {snakeVal || ladderVal}</span>
       )}
+      
       <span className={styles.value}>{value}</span>
-    </div>
+    </td>
   );
 };
 

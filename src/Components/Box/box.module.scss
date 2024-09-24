@@ -24,16 +24,18 @@
 .value{
     font-weight: bold;
     font-size: 0.7rem;
+    display: inline-block;
 }
 .stepper{
-    position: absolute;
+     position: absolute;
     width: 0.6rem;
     height: 0.6rem;
     border: 0.1rem solid black;
     top: 3%;
     right: 3%;
-    font-size: 0.5rem;
+    font-size: 0.42rem;
     background-color: white;
+    display: inline-block;
 }
 
 
