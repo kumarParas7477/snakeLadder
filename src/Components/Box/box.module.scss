@@ -1,15 +1,17 @@
 
 .box{
-    width : 2.0rem;
-    height : 2.0rem;
-    border : 0.1rem solid black;
-    align-content: center;
+    width: 2.0rem;
+    height: 2.0rem;
+    border: 0.1rem solid black;
     margin: 0.2rem;
-    // display:inline-block ;
+    display: flex; /* Add Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     position: relative;
+  
     @media (max-width: 768px) {
-        width: 0.95rem;
-        height: 0.95rem;
+      width: 0.95rem;
+      height: 0.95rem;
     }
 }
 .active{
