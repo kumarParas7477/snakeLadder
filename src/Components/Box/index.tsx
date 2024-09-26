@@ -23,7 +23,7 @@ const Box: FC<boxProps> = ({ value, active, snakeVal, ladderVal ,players}) => {
       style={objForColors[value] ? {borderRadius:'100%',backgroundColor:objForColors[value],borderColor:objForColors[value]} : {}}
     >
       {(snakeVal || ladderVal) && (
-        <span className={styles.stepper}> {snakeVal || ladderVal}</span>
+        <sub className={styles.stepper}> {snakeVal || ladderVal}</sub>
       )}
       
       <span className={styles.value}>{value}</span>

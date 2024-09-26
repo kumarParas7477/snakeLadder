@@ -50,12 +50,13 @@ const Board: FC<props> = ({ initialPlayers }) => {
           current > nextval ? current-- : current++;
           const list = [...players];
           list[currentPlayer].value = current;
+          setPlayers(list);
           if(current == 100){
             setWinner(players[currentPlayer].name);
             setButtonVal('Reload');
+            clearInterval(intervalId);
             return;
           }
-          setPlayers(list);
         } else {
           clearInterval(intervalId); // Stop once it reaches nextval
           const ladder = ladderPoints.get(nextval);
@@ -101,7 +102,7 @@ const Board: FC<props> = ({ initialPlayers }) => {
   const buttonDisabled = useMemo(
     () =>
       players.length === 0 ||
-      buttonVal !== "Roll Dice",
+      (buttonVal !== "Roll Dice" && buttonVal !== 'Reload'),
     [players, buttonVal,buttonVal]
   );
 
@@ -129,7 +130,7 @@ const Board: FC<props> = ({ initialPlayers }) => {
   },[initialPlayers,currentPlayer,players]);
   return (
     <> 
-      {winner && <span>{`${winner} won the game!!`}</span>}
+      {winner && <span className={styles.winner}>{`${winner} won the game!!`}</span>}
       <div className={styles.board}>{getTable()}</div>
       {players.length !== 0 && (
         <div className={styles.diceAndPlayer}>

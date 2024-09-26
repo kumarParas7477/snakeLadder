@@ -1,10 +1,10 @@
 .board{
         border:0.2rem solid black;
         width: fit-content;
-        margin: auto;  
         padding: 0.2rem;
         margin-top: 4rem;
         background-color: white;
+        align-self: center;
 }
 tbody{
         display: flex;
@@ -37,4 +37,12 @@ tbody tr:nth-child(even){
 
 .diceAndPlayer{
         margin-bottom: 1rem;
+}
+
+.winner{
+        font-size: 5rem;
+        display: block;
+        margin-top: 10rem;
+        position: absolute;
+
 }
