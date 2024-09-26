@@ -1,7 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import Box from "../Box";
 import styles from "./board.module.css";
-import SelectPlayers from "../selectPlayers";
 import { IPlayer } from "../../types";
 
 interface props {
@@ -129,7 +128,7 @@ const Board: FC<props> = ({ initialPlayers }) => {
     );
   },[initialPlayers,currentPlayer,players]);
   return (
-    <> 
+    <>
       {winner && <span className={styles.winner}>{`${winner} won the game!!`}</span>}
       <div className={styles.board}>{getTable()}</div>
       {players.length !== 0 && (

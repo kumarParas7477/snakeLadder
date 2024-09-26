@@ -2,7 +2,7 @@
 .box{
     width: 2.0rem;
     height: 2.0rem;
-    border: 0.1rem solid black;
+    border: 0.08rem solid rgb(161, 158, 164);
     margin: 0.2rem;
     display: flex; /* Add Flexbox */
     justify-content: center; /* Center horizontally */
@@ -31,6 +31,7 @@
 
 .value{
     font-weight: bold;
+    color: white;
     font-size: 0.7rem;
     display: block;
     @media (max-width: 768px) {

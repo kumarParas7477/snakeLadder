@@ -1,10 +1,9 @@
 .board{
-        border:0.2rem solid black;
         width: fit-content;
         padding: 0.2rem;
         margin-top: 4rem;
-        background-color: white;
         align-self: center;
+        
 }
 tbody{
         display: flex;
@@ -21,7 +20,7 @@ tbody tr:nth-child(even){
 .dice{
         margin-top: 1rem;
         width: 5rem;
-        height: 4rem;
+        height: 2rem;
         font-size:medium;
         font-weight: bolder;
         background-color: blanchedalmond;
@@ -32,6 +31,8 @@ tbody tr:nth-child(even){
 .currentPlayer{
         margin-top: 1rem;
         font-weight: bold;
+        color: white;
+        text-transform:uppercase;
 }
 
 
@@ -40,9 +41,11 @@ tbody tr:nth-child(even){
 }
 
 .winner{
-        font-size: 5rem;
+        font-size: 2rem;
         display: block;
-        margin-top: 10rem;
-        position: absolute;
+        color: beige;
+        /* margin-top: 10rem; */
 
+    
+   
 }

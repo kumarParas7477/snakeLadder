@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import styles from "./selectPlayers.module.scss"
+import styles from "./selectPlayers.module.scss";
+import iconImage from "./../../Assets/snakeLadderIcon.jpg"
 interface props {
   setPlayers: (value: number) => void;
 }
@@ -10,12 +11,12 @@ const SelectPlayers: FC<props> = ({ setPlayers }) => {
   };
   return (
     <div className={styles.content}>
-        <span>Select No Players</span>
+       {/* <img className={styles.iconImage} src={iconImage} /> */}
     <ul className={styles.list} onClick={handleSelectPlayers}>
-      <li value={2}>2</li>
-      <li value={3}>3</li>
-      <li value={4}>4</li>
-      <li value={5}>5</li>
+      <li value={2}>Players 2</li>
+      <li value={3}>Players 3</li>
+      <li value={4}>Players 4</li>
+      <li value={5}>Player 5</li>
     </ul>
     </div>
   );
