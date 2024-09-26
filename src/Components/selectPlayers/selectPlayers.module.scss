@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+
     // transform: translate(-50%,-50%);
 }
 .iconImage{
@@ -20,6 +21,10 @@ ul{
     position: absolute;
     top: 10%;
     list-style: none;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+      }
 }
 li{
     border: 0.08rem solid rgb(161, 158, 164);
@@ -27,6 +32,9 @@ li{
     padding: 0.5rem;
     margin-right: 1rem;
     font-weight: bold;
+    @media (max-width: 768px) {
+        margin-bottom: 1rem;
+      }
 }
 
 
