@@ -23,7 +23,7 @@ ul{
     list-style: none;
     @media (max-width: 768px) {
         flex-direction: column;
-        justify-content: center;
+        top: 30%;
       }
 }
 li{
