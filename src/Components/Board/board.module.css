@@ -19,8 +19,8 @@ tbody tr:nth-child(even){
      flex-direction: row-reverse;   
 }
 .dice{
-        margin-top: 3rem;
-        width: 10rem;
+        margin-top: 1rem;
+        width: 5rem;
         height: 4rem;
         font-size:medium;
         font-weight: bolder;
