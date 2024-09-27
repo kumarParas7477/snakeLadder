@@ -128,7 +128,7 @@ const Board: FC<props> = ({ initialPlayers }) => {
     );
   },[initialPlayers,currentPlayer,players]);
   return (
-    <>
+    <div className={styles.boardContent}>
       {winner && <span className={styles.winner}>{`${winner} won the game!!`}</span>}
       <div className={styles.board}>{getTable()}</div>
       {players.length !== 0 && (
@@ -145,7 +145,7 @@ const Board: FC<props> = ({ initialPlayers }) => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

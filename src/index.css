@@ -5,9 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./Assets/snakeLadderIcon.webp");
+  background-repeat: no-repeat;
+  background-size: cover; /* Contain will prevent the image from stretching */
+
 }
 html{
   font-size: 2.5vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 code {

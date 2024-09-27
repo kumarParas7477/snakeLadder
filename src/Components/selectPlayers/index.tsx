@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styles from "./selectPlayers.module.scss";
-import iconImage from "./../../Assets/snakeLadderIcon.jpg"
+
 interface props {
   setPlayers: (value: number) => void;
 }
@@ -11,7 +11,6 @@ const SelectPlayers: FC<props> = ({ setPlayers }) => {
   };
   return (
     <div className={styles.content}>
-       {/* <img className={styles.iconImage} src={iconImage} /> */}
     <ul className={styles.list} onClick={handleSelectPlayers}>
       <li value={2}>Players 2</li>
       <li value={3}>Players 3</li>
